@@ -1,0 +1,5 @@
+<root>
+    <item name='java.util.Date'>
+        <annotation name='org.jetbrains.annotations.Nullable' />
+    </item>
+</root>

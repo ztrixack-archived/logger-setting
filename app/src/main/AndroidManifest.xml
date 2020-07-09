@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="th.co.sic.app.nvtm.settings"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-sdk />
+
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!--
+        versionName - versionCode + increment. versionCode combines MSG_API_MAJOR_VERSION and SW_MAJOR_VERSION NUMBER.
+        See MainActivity.java
+        - Amalthea - 315140/315141/315142/315143/315144 (v3/v4/v5/v5/v5)
+        - Balios - 415525/415526/415527 (v6/v6/v7)
+        - Cadmus - 516270/516271/516272 (v8/v8/v8)
+        - Dindymene - 516273/516274/516275/516276/516277/516278/516279 (v9/v10/v11/v12/v13/v14/v15)
+        - Eris - 617390/617391/617392/617393/617394 (v16/v16/v16/v17/v17)
+
+        Ensure that the value for android:versionName and android:versionCode below is set equal to
+        defaultConfig > versionName and versionCode in build.gradle.
+        Check the version string in strings.xml
+    -->
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+        android:versionCode="617394"
+        android:versionName="Eris">
+        <activity
+            android:name=".MainActivity"
+            android:alwaysRetainTaskState="true"
+            android:label="@string/app_name"
+            android:launchMode="singleInstance">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

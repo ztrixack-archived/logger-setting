@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout style="@style/AppTheme"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    tools:context="th.co.sic.app.nvtm.settings.fragments.ConfigFragment">
+
+    <TextView
+        android:id="@+id/titleConfigTextView"
+        style="@style/HeaderTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/configFragment_label"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/help1TextView"
+        style="@style/TextTheme"
+        android:textStyle="italic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:layout_marginTop="3dp"
+        android:text="@string/configHelp_Label" />
+
+    <Switch
+        android:id="@+id/enableConfigSwitch"
+        style="@style/TextTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="24dp"
+        android:onClick="onEnableConfigSwitchClicked"
+        android:text="@string/moduleEnabled_label"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/dateConfigTextView"
+        style="@style/WidgetTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="12dp"
+        android:onClick="onDateConfigTextViewClicked" />
+
+    <TextView
+        android:id="@+id/timeConfigTextView"
+        style="@style/WidgetTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="12dp"
+        android:onClick="onTimeConfigTextViewClicked" />
+
+    <TextView
+        android:id="@+id/wakeupTimeConfigTextView"
+        style="@style/WidgetTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="12dp"
+        android:onClick="onWakeupTimeConfigTextViewClicked"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Threshold"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="12dp"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/upperThresholdConfigTextView"
+        style="@style/WidgetTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="12dp"
+        android:onClick="onUpperThresholdConfigTextViewClicked"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/lowerThresholdConfigTextView"
+        style="@style/WidgetTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="12dp"
+        android:onClick="onLowerThresholdConfigTextViewClicked"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/applyConfigButton"
+        style="@style/ButtonTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:onClick="onApplyConfigButtonClicked"
+        android:text="@string/applyConfig" />
+
+</LinearLayout>

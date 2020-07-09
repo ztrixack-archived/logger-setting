@@ -1,0 +1,43 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:background">#F0F0F0</item>
+        <item name="android:fontFamily">@string/font_family_medium</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="HeaderTheme" parent="Base.TextAppearance.AppCompat.Headline">
+        <item name="android:textColor">@color/deepBlue</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="WidgetTheme">
+        <item name="android:background">@android:drawable/btn_dropdown</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:backgroundTint">@color/deepBlueTransparent</item>
+        <item name="android:backgroundTintMode">src_atop</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="ButtonTheme">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:backgroundTint">@color/orange</item>
+        <item name="android:backgroundTintMode">src_over</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="TextTheme">
+        <item name="android:textColor">@color/deepBlueTransparent</item>
+        <item name="android:fontFamily">@string/font_family_condensed</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+</resources>

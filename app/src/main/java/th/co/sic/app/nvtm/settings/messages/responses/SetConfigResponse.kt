@@ -4,9 +4,6 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class SetConfigResponse : Response {
-    // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
-    // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
-    // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
     constructor() : super() {
         LENGTH = 6
     }

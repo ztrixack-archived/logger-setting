@@ -272,6 +272,13 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
+    public void onIntervalConfigTextViewClicked(View view) {
+        ConfigFragment configFragment = getConfigFragment();
+        if (configFragment != null) {
+            configFragment.numberPickerPopup(view);
+        }
+    }
+
     public void onWakeupTimeConfigTextViewClicked(View view) {
         ConfigFragment configFragment = getConfigFragment();
         if (configFragment != null) {

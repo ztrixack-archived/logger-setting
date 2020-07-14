@@ -382,7 +382,7 @@ public class ConfigFragment extends Fragment {
         Calendar calendar = Calendar.getInstance();
         Calendar date = ConfigFragment.date;
         Calendar time = ConfigFragment.time;
-        calendar.set(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH), time.get(Calendar.HOUR), time.get(Calendar.MINUTE));
+        calendar.set(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH), time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE));
         return calendar.getTimeInMillis();
     }
 

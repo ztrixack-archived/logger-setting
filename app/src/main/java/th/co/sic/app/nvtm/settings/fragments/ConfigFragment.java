@@ -31,7 +31,10 @@ import th.co.sic.app.nvtm.settings.R;
 
 public class ConfigFragment extends Fragment {
 
-    final private static int[] wakeupTimes = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    final private static int[] intervals = new int[]{5, 10, 15, 30, 60};
+    final private static int[] intervalsUnitIds = new int[]{R.string.seconds};
+
+    final private static int[] wakeupTimes = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
     final private static int[] wakeupTimesUnitIds = new int[]{R.string.minutes};
 
     final private static int minThresholds = -37; /* Celsius */
@@ -41,7 +44,7 @@ public class ConfigFragment extends Fragment {
     static private boolean enable = true; /* turn on/off */
     static private Calendar date = Calendar.getInstance(); /* date dd-MM-yyyy */
     static private Calendar time = Calendar.getInstance(); /* HH:mm */
-    static private int interval = 30; /* seconds */
+    static private int interval; /* seconds */
     static private int wakeupTime; /* minutes */
     static private int startDelay = 0; /* seconds */
     static private int runningTime = 0; /* seconds */
@@ -50,11 +53,39 @@ public class ConfigFragment extends Fragment {
     static private int validMinimum = 0; /* deci-celsius */
     static private int validMaximum = 0; /* deci-celsius */
 
+    static private int intervalNumber = 3;
     static private int wakeupTimeNumber = 1;
 
+    static private int intervalUnit = 0;
     static private int wakeupTimeUnit = 0;
     static private int upperThresholdUnit = 0;
     static private int lowerThresholdUnit = 0;
+
+    private static int[] upperThresholds() {
+        int length = maxThresholds - lowerThreshold + 1;
+        int[] values = new int[length];
+        for (int i = 0; i < length; ++i) {
+            values[i] = lowerThreshold + i;
+        }
+        return values;
+    }
+
+    private int upperThresholdNumber(int value) {
+        return value - lowerThreshold;
+    }
+
+    private static int[] lowerThresholds() {
+        int length = upperThreshold - minThresholds + 1;
+        int[] values = new int[length];
+        for (int i = 0; i < length; ++i) {
+            values[i] = minThresholds + i;
+        }
+        return values;
+    }
+
+    private int lowerThresholdNumber(int value) {
+        return value - minThresholds;
+    }
 
     private void setEnable(boolean enable) {
         ConfigFragment.enable = enable;
@@ -68,6 +99,12 @@ public class ConfigFragment extends Fragment {
         ConfigFragment.time = time;
     }
 
+    static private void setInterval(int number, int unit) {
+        ConfigFragment.intervalNumber = number;
+        ConfigFragment.intervalUnit = unit;
+        ConfigFragment.interval = intervals[number];
+    }
+
     static private void setWakeupTime(int number, int unit) {
         ConfigFragment.wakeupTimeNumber = number;
         ConfigFragment.wakeupTimeUnit = unit;
@@ -76,13 +113,12 @@ public class ConfigFragment extends Fragment {
 
     static private void setUpperThreshold(int number, int unit) {
         ConfigFragment.upperThresholdUnit = unit;
-        ConfigFragment.upperThreshold = number;
+        ConfigFragment.upperThreshold = upperThresholds()[number];
     }
-
 
     static private void setLowerThreshold(int number, int unit) {
         ConfigFragment.lowerThresholdUnit = unit;
-        ConfigFragment.lowerThreshold = number;
+        ConfigFragment.lowerThreshold = lowerThresholds()[number];
     }
 
     public void datePickerPopup(final View view) {
@@ -127,6 +163,7 @@ public class ConfigFragment extends Fragment {
     }
 
     public void numberPickerPopup(final View view) {
+        final TextView intervalTextView = view.findViewById(R.id.intervalConfigTextView);
         final TextView wakeupTimeTextView = view.findViewById(R.id.wakeupTimeConfigTextView);
         final TextView upperThresholdTextView = view.findViewById(R.id.upperThresholdConfigTextView);
         final TextView lowerThresholdTextView = view.findViewById(R.id.lowerThresholdConfigTextView);
@@ -136,32 +173,25 @@ public class ConfigFragment extends Fragment {
         int selectedValue = 0;
         int selectedUnit = 0;
 
-         if (wakeupTimeTextView == view) {
+        if (intervalTextView == view) {
+            values = ConfigFragment.intervals;
+            unitIds = ConfigFragment.intervalsUnitIds;
+            selectedValue = ConfigFragment.intervalNumber;
+            selectedUnit = ConfigFragment.intervalUnit;
+        } else if (wakeupTimeTextView == view) {
              values = ConfigFragment.wakeupTimes;
              unitIds = ConfigFragment.wakeupTimesUnitIds;
              selectedValue = ConfigFragment.wakeupTimeNumber;
              selectedUnit = ConfigFragment.wakeupTimeUnit;
         } else if (upperThresholdTextView == view) {
-             int length = maxThresholds - ConfigFragment.lowerThreshold + 1;
-             values = new int[length];
-             for (int i = 0; i < length; ++i) {
-                 values[i] = ConfigFragment.lowerThreshold + i;
-                 if (ConfigFragment.upperThreshold == values[i]) {
-                     selectedValue = i;
-                 }
-             }
+             values = upperThresholds();
              unitIds = ConfigFragment.thresholdUnitIds;
+             selectedValue = upperThresholdNumber(ConfigFragment.upperThreshold);
              selectedUnit = ConfigFragment.upperThresholdUnit;
         } else if (lowerThresholdTextView == view) {
-             int length = ConfigFragment.upperThreshold - minThresholds + 1;
-             values = new int[length];
-             for (int i = 0; i < length; ++i) {
-                 values[i] = minThresholds + i;
-                 if (ConfigFragment.lowerThreshold == values[i]) {
-                     selectedValue = i;
-                 }
-             }
+             values = lowerThresholds();
              unitIds = ConfigFragment.thresholdUnitIds;
+             selectedValue = lowerThresholdNumber(ConfigFragment.lowerThreshold);
              selectedUnit = ConfigFragment.lowerThresholdUnit;
         }
 
@@ -210,10 +240,9 @@ public class ConfigFragment extends Fragment {
         final AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
         alert.setCancelable(false);
         alert.setView(linearLayout);
-        final int[] finalValues = values;
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                int number = (numberPicker == null) ? 0 : finalValues[numberPicker.getValue()];
+                int number = (numberPicker == null) ? 0 : numberPicker.getValue();
                 int unit = (unitPicker == null) ? 0 : unitPicker.getValue();
                 update(view, number, unit);
             }
@@ -251,15 +280,17 @@ public class ConfigFragment extends Fragment {
             final Switch enableSwitch = view.findViewById(R.id.enableConfigSwitch);
             final TextView dateTextView = view.findViewById(R.id.dateConfigTextView);
             final TextView timeTextView = view.findViewById(R.id.timeConfigTextView);
+            final TextView intervalTextView = view.findViewById(R.id.intervalConfigTextView);
             final TextView wakeupTimeTextView = view.findViewById(R.id.wakeupTimeConfigTextView);
             final TextView upperThresholdTextView = view.findViewById(R.id.upperThresholdConfigTextView);
             final TextView lowerThresholdTextView = view.findViewById(R.id.lowerThresholdConfigTextView);
             update(enableSwitch, ConfigFragment.enable);
             update(dateTextView, ConfigFragment.date);
             update(timeTextView, ConfigFragment.time);
+            update(intervalTextView, ConfigFragment.intervalNumber, ConfigFragment.intervalUnit);
             update(wakeupTimeTextView, ConfigFragment.wakeupTimeNumber, ConfigFragment.wakeupTimeUnit);
-            update(upperThresholdTextView, ConfigFragment.upperThreshold, ConfigFragment.upperThresholdUnit);
-            update(lowerThresholdTextView, ConfigFragment.lowerThreshold, ConfigFragment.lowerThresholdUnit);
+            update(upperThresholdTextView, upperThresholdNumber(ConfigFragment.upperThreshold), ConfigFragment.upperThresholdUnit);
+            update(lowerThresholdTextView, lowerThresholdNumber(ConfigFragment.lowerThreshold), ConfigFragment.lowerThresholdUnit);
         }
     }
 
@@ -281,11 +312,16 @@ public class ConfigFragment extends Fragment {
     public void update(View changedView, int number, int unit) {
         View view = this.getView();
         if ((view != null) && (changedView != null)) {
+            final TextView intervalTextView = view.findViewById(R.id.intervalConfigTextView);
             final TextView wakeupTimeTextView = view.findViewById(R.id.wakeupTimeConfigTextView);
             final TextView upperThresholdTextView = view.findViewById(R.id.upperThresholdConfigTextView);
             final TextView lowerThresholdTextView = view.findViewById(R.id.lowerThresholdConfigTextView);
 
-            if (changedView == wakeupTimeTextView) {
+            if (changedView == intervalTextView) {
+                setInterval(number, unit);
+                String s = getString(ConfigFragment.intervalsUnitIds[unit]);
+                intervalTextView.setText(String.format(getString(R.string.interval_configRule), intervals[number], s));
+            } else if (changedView == wakeupTimeTextView) {
                 setWakeupTime(number, unit);
                 String s = getString(ConfigFragment.wakeupTimesUnitIds[unit]);
                 wakeupTimeTextView.setText(String.format(getString(R.string.wakeup_configRule), wakeupTimes[number], s));
@@ -346,7 +382,7 @@ public class ConfigFragment extends Fragment {
         Calendar calendar = Calendar.getInstance();
         Calendar date = ConfigFragment.date;
         Calendar time = ConfigFragment.time;
-        calendar.set(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH), time.get(Calendar.HOUR), time.get(Calendar.MINUTE));
+        calendar.set(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH), time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE));
         return calendar.getTimeInMillis();
     }
 

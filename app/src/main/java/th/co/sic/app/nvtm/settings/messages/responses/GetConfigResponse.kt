@@ -6,9 +6,6 @@ import th.co.sic.app.nvtm.settings.utils.Util
 import kotlin.math.abs
 
 open class GetConfigResponse : Response {
-    /**
-     * < Achievement: Logging has stopped because the time spent logging has exceeded the no-zero value set in APP_MSG_CMD_SETCONFIG_T.runningTime.
-     */
     private var currentTime = 0 // 'current' as in: when the response class was created = 0
     var configTime = 0
         protected set
@@ -22,7 +19,8 @@ open class GetConfigResponse : Response {
         protected set
     var validMaximum = 0
         protected set
-    /* -------------------------------------------------------------------------------- */ var attainedMinimum = 0
+    /* -------------------------------------------------------------------------------- */
+    var attainedMinimum = 0
         protected set
     var attainedMaximum = 0
         protected set
@@ -41,11 +39,12 @@ open class GetConfigResponse : Response {
     protected constructor(`in`: Parcel?) : super(`in`)
 
     @Throws(ArrayIndexOutOfBoundsException::class)
-    override fun SetData(data: ByteArray) {
-        super.SetData(data)
+    override fun setData(data: ByteArray) {
+        super.setData(data)
         currentTime = (System.currentTimeMillis() / 1000).toInt()
 
-        /* -------------------------------------------------------------------------------- */configTime = Util.bytesToInt(byteArrayOf(data[6], data[7], data[8], data[9]))
+        /* -------------------------------------------------------------------------------- */
+        configTime = Util.bytesToInt(byteArrayOf(data[6], data[7], data[8], data[9]))
         interval = Util.bytesToInt(byteArrayOf(data[10], data[11]))
         startDelay = Util.bytesToInt(byteArrayOf(data[12], data[13], data[14], data[15]))
         runningTime = Util.bytesToInt(byteArrayOf(data[16], data[17], data[18], data[19]))
@@ -59,7 +58,8 @@ open class GetConfigResponse : Response {
             t -= 0x10000
         }
         validMaximum = t
-        /* -------------------------------------------------------------------------------- */t = Util.bytesToInt(byteArrayOf(data[24], data[25]))
+        /* -------------------------------------------------------------------------------- */
+        t = Util.bytesToInt(byteArrayOf(data[24], data[25]))
         if (t >= 0x00008000) {
             t -= 0x10000
         }

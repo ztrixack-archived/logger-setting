@@ -13,23 +13,23 @@ open class SetConfigCommand : Command {
         var index = 2
 
         // turn on/off
-        val _enable: Byte = if (enable) 0x55.toByte() else 0x00.toByte()
-        data[index++] = (_enable and 0x000000FF.toByte()).toByte()
+        val enableValue: Byte = if (enable) 0x55.toByte() else 0x00.toByte()
+        data[index++] = (enableValue and 0x000000FF.toByte()).toByte()
 
         // current date time
-        val _datetime = datetime / 1000
-        data[index++] = (_datetime and 0x000000FF).toByte()
-        data[index++] = (_datetime shr 8 and 0x000000FF).toByte()
-        data[index++] = (_datetime shr 16 and 0x000000FF).toByte()
-        data[index++] = (_datetime shr 24 and 0x000000FF).toByte()
+        val datetimeValue = datetime / 1000
+        data[index++] = (datetimeValue and 0x000000FF).toByte()
+        data[index++] = (datetimeValue shr 8 and 0x000000FF).toByte()
+        data[index++] = (datetimeValue shr 16 and 0x000000FF).toByte()
+        data[index++] = (datetimeValue shr 24 and 0x000000FF).toByte()
 
         // interval
-        data[index++] = (interval and 0x00FF).toByte()
-        data[index++] = (interval shr 8 and 0x00FF).toByte()
+        data[index++] = (interval and 0x000000FF).toByte()
+        data[index++] = (interval shr 8 and 0x000000FF).toByte()
 
         // wakeup times to log
-        val _wakeupTime = wakeupTime / interval
-        data[index++] = (_wakeupTime and 0x00FF).toByte()
+        val wakeupTimeValue = wakeupTime / interval
+        data[index++] = (wakeupTimeValue and 0x000000FF).toByte()
 
         // start delay (IGNORED)
         data[index++] = (startDelay and 0x000000FF).toByte()
@@ -44,14 +44,14 @@ open class SetConfigCommand : Command {
         data[index++] = (runningTime shr 24 and 0x000000FF).toByte()
 
         // upper Threshold
-        val _upperThreshold = upperThreshold * 10
-        data[index++] = (_upperThreshold and 0x00FF).toByte()
-        data[index++] = (_upperThreshold shr 8 and 0x00FF).toByte()
+        val upperThresholdValue = upperThreshold * 10
+        data[index++] = (upperThresholdValue and 0x000000FF).toByte()
+        data[index++] = (upperThresholdValue shr 8 and 0x000000FF).toByte()
 
         // lower Threshold
-        val _lowerThreshold = lowerThreshold * 10
-        data[index++] = (_lowerThreshold and 0x00FF).toByte()
-        data[index++] = (_lowerThreshold shr 8 and 0x00FF).toByte()
+        val lowerThresholdValue = lowerThreshold * 10
+        data[index++] = (lowerThresholdValue and 0x000000FF).toByte()
+        data[index++] = (lowerThresholdValue shr 8 and 0x000000FF).toByte()
 
         // valid Minimum (IGNORED)
         data[index++] = (validMinimum and 0x000000FF).toByte()

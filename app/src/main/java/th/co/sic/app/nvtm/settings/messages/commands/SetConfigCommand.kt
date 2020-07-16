@@ -24,11 +24,12 @@ open class SetConfigCommand : Command {
         data[index++] = (datetimeValue shr 24 and 0x000000FF).toByte()
 
         // interval
-        data[index++] = (interval and 0x000000FF).toByte()
-        data[index++] = (interval shr 8 and 0x000000FF).toByte()
+        val intervalValue: Int = if (enable) interval else 3600;
+        data[index++] = (intervalValue and 0x000000FF).toByte()
+        data[index++] = (intervalValue shr 8 and 0x000000FF).toByte()
 
         // wakeup times to log
-        val wakeupTimeValue = wakeupTime / interval
+        val wakeupTimeValue: Int = if (enable) wakeupTime else 0;
         data[index++] = (wakeupTimeValue and 0x000000FF).toByte()
 
         // start delay (IGNORED)

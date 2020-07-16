@@ -31,8 +31,8 @@ import th.co.sic.app.nvtm.settings.R;
 
 public class ConfigFragment extends Fragment {
 
-    final private static int[] intervals = new int[]{5, 10, 15, 30, 60};
-    final private static int[] intervalsUnitIds = new int[]{R.string.seconds};
+    final private static int[] intervals = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
+    final private static int[] intervalsUnitIds = new int[]{R.string.minutes};
 
     final private static int[] wakeupTimes = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30};
     final private static int[] wakeupTimesUnitIds = new int[]{R.string.minutes};
@@ -44,7 +44,7 @@ public class ConfigFragment extends Fragment {
     static private boolean enable = true; /* turn on/off */
     static private Calendar date = Calendar.getInstance(); /* date dd-MM-yyyy */
     static private Calendar time = Calendar.getInstance(); /* HH:mm */
-    static private int interval; /* seconds */
+    static private int interval; /* minutes */
     static private int wakeupTime; /* minutes */
     static private int startDelay = 0; /* seconds */
     static private int runningTime = 0; /* seconds */
@@ -53,7 +53,7 @@ public class ConfigFragment extends Fragment {
     static private int validMinimum = 0; /* deci-celsius */
     static private int validMaximum = 0; /* deci-celsius */
 
-    static private int intervalNumber = 3;
+    static private int intervalNumber = 1;
     static private int wakeupTimeNumber = 1;
 
     static private int intervalUnit = 0;
@@ -102,7 +102,7 @@ public class ConfigFragment extends Fragment {
     static private void setInterval(int number, int unit) {
         ConfigFragment.intervalNumber = number;
         ConfigFragment.intervalUnit = unit;
-        ConfigFragment.interval = intervals[number];
+        ConfigFragment.interval = intervals[number] * 60;
     }
 
     static private void setWakeupTime(int number, int unit) {
@@ -380,9 +380,9 @@ public class ConfigFragment extends Fragment {
 
     public static long getDateTime() {
         Calendar calendar = Calendar.getInstance();
-        Calendar date = ConfigFragment.date;
-        Calendar time = ConfigFragment.time;
-        calendar.set(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH), time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE));
+//        Calendar date = ConfigFragment.date;
+//        Calendar time = ConfigFragment.time;
+//        calendar.set(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH), time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE));
         return calendar.getTimeInMillis();
     }
 
@@ -391,7 +391,7 @@ public class ConfigFragment extends Fragment {
     }
 
     public static int getWakeupTime() {
-        return ConfigFragment.wakeupTime;
+        return 1;
     }
 
     public static int getStartDelay() {

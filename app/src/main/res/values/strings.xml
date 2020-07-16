@@ -16,7 +16,7 @@
     <string formatted="false" name="firstConfigConfirmed_message">Configuration confirmed.\nA first measurement will be taken after %d %s.</string>
     <string formatted="false" name="date_configRule">• Date:  %s</string>
     <string formatted="false" name="time_configRule">• Time:  %s</string>
-    <string formatted="false" name="interval_configRule">• Alarm Interval:  %d %s</string>
+    <string formatted="false" name="interval_configRule">• Power Down Time:  %d %s</string>
     <string formatted="false" name="wakeup_configRule">• Measure time:  %d %s</string>
     <string formatted="false" name="highThreshold_configRule">• Upper:  %d %s</string>
     <string formatted="false" name="lowThreshold_configRule">• Lower:  %d %s</string>

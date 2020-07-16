@@ -114,6 +114,7 @@
                 android:id="@+id/dateConfigTextView"
                 style="@style/WidgetTheme"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:onClick="onDateConfigTextViewClicked" />
 
@@ -122,11 +123,13 @@
                 style="@style/WidgetTheme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:onClick="onTimeConfigTextViewClicked" />
 
             <TextView
                 android:id="@+id/wakeupTimeConfigTextView"
                 style="@style/WidgetTheme"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onWakeupTimeConfigTextViewClicked"

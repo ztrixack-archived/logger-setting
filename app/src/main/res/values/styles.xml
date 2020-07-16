@@ -25,6 +25,14 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="WidgetThemeDisabled">
+        <item name="android:background">@android:drawable/btn_default</item>
+        <item name="android:textColor">@color/deepBlue</item>
+        <item name="android:backgroundTintMode">src_atop</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
     <style name="ButtonTheme">
         <item name="android:textColor">@color/white</item>
         <item name="android:backgroundTint">@color/orange</item>

@@ -16,7 +16,7 @@ abstract class Response : Parcelable {
 
     internal constructor()
     internal constructor(data: ByteArray) : this() {
-        SetData(data)
+        setData(data)
     }
 
     internal constructor(`in`: Parcel?) {
@@ -26,7 +26,7 @@ abstract class Response : Parcelable {
     }
 
     @Throws(ArrayIndexOutOfBoundsException::class)
-    protected open fun SetData(data: ByteArray) {
+    protected open fun setData(data: ByteArray) {
         if (LENGTH > 0) {
             if (data.size != LENGTH) {
                 throw ArrayIndexOutOfBoundsException(String.format(Locale.getDefault(), "Response decoding error for Id %s, received length %d differs from expected length %d", GetEnum(data[0].toInt()).toString(), data.size, LENGTH))
@@ -65,9 +65,6 @@ abstract class Response : Parcelable {
             return tag
         }
 
-    // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
-    // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
-    // // // // // // // // // // // // // // // // // // // // // // // // // // // // // //
     val errorCode: Int
         get() = Util.bytesToInt(byteArrayOf(data!![2], data!![3], data!![4], data!![5]))
 
@@ -99,7 +96,7 @@ abstract class Response : Parcelable {
                     try {
                         val c = Class.forName(responseString)
                         response = c.newInstance() as Response
-                        response.SetData(payload)
+                        response.setData(payload)
                     } catch (e: ClassNotFoundException) {
                         Log.d("Error parsing message", Arrays.toString(payload))
                         response = null
